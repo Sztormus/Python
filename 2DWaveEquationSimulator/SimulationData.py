@@ -201,9 +201,9 @@ class SimulationData:
     def __forcing_term(self, x, x_f, y, y_f, t, t_f, delta_x, delta_y, sigma):
         return 100 * math.exp(- ((t - t_f) ** 2)/(2 * sigma ** 2)) * self.__delta_kronecker(x, x_f, delta_x) * self.__delta_kronecker(y, y_f, delta_y)
 
-    def __calculate_m(self, n, k, __n_x, delta_x, delta_y, delta_t, parameter_a, parameter_b, beta, x_f, y_f, t_f, sigma):
-        j = math.floor(k / __n_x)
-        i = k - j * __n_x
+    def __calculate_m(self, n, k, n_x, delta_x, delta_y, delta_t, parameter_a, parameter_b, beta, x_f, y_f, t_f, sigma):
+        j = math.floor(k / n_x)
+        i = k - j * n_x
         previous_extortion = self.__forcing_term(delta_x * i, x_f, delta_y * j, y_f, (n - 2) * delta_t, t_f, delta_x, delta_y, sigma)
         actual_extortion = self.__forcing_term(delta_x * i, x_f, delta_y * j, y_f, (n - 1) * delta_t, t_f, delta_x, delta_y, sigma)
         next_extortion = self.__forcing_term(delta_x * i, x_f, delta_y * j, y_f, n * delta_t, t_f, delta_x, delta_y, sigma)
